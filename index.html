@@ -387,7 +387,32 @@
             <div class="result" id="interestResult"></div>
         </div>
 
+<!-- Compound Interest Calculator -->
+        <div class="calculator">
+            <h2>Compound Interest</h2>
 
+            <label for="compoundPrincipal">Principal Amount</label>
+            <input type="number" id="compoundPrincipal" placeholder="Enter principal">
+
+            <label for="compoundRate">Annual Interest Rate (%)</label>
+            <input type="number" id="compoundRate" placeholder="Enter rate">
+
+            <label for="compoundTime">Time (Years)</label>
+            <input type="number" id="compoundTime" placeholder="Enter years">
+
+            <label for="compoundFrequency">Compounds Per Year</label>
+            <select id="compoundFrequency">
+                <option value="1">Annually</option>
+                <option value="2">Semi-annually</option>
+                <option value="4">Quarterly</option>
+                <option value="12">Monthly</option>
+                <option value="365">Daily</option>
+            </select>
+
+            <button onclick="calculateCompoundInterest()">Calculate</button>
+
+            <div class="result" id="compoundResult"></div>
+        </div>
         <!-- Age Calculator -->
         <div class="calculator">
             <h2>Age Calculator</h2>
@@ -703,7 +728,30 @@ function calculateBasic() {
 
     result.textContent = "Answer = " + answer;
 }
+function calculateCompoundInterest() {
+    const principal = parseFloat(document.getElementById("compoundPrincipal").value);
+    const rate = parseFloat(document.getElementById("compoundRate").value);
+    const time = parseFloat(document.getElementById("compoundTime").value);
+    const frequency = parseFloat(document.getElementById("compoundFrequency").value);
+    const result = document.getElementById("compoundResult");
 
+    if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+        showError(result, "Please enter all values.");
+        return;
+    }
+
+    if (principal < 0 || rate < 0 || time < 0) {
+        showError(result, "Values cannot be negative.");
+        return;
+    }
+
+    const amount = principal * Math.pow(1 + (rate / 100) / frequency, frequency * time);
+    const interest = amount - principal;
+
+    result.textContent =
+        "Interest = " + interest.toFixed(2) +
+        " | Total = " + amount.toFixed(2);
+}
 </script>
 
 </body>
