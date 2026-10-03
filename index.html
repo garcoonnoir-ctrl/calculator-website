@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="QuickCalc offers free, simple and useful online calculators for everyday calculations.">
+    <meta name="keywords" content="online calculator, percentage calculator, discount calculator, age calculator, profit calculator">
+    <meta name="author" content="QuickCalc">
+
     <title>QuickCalc - Free Online Calculators</title>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: #f4f6f8;
             margin: 0;
-            padding: 0;
             color: #222;
         }
 
@@ -17,23 +30,59 @@
             background: #111827;
             color: white;
             text-align: center;
-            padding: 30px 15px;
+            padding: 35px 15px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 36px;
+            font-size: 38px;
         }
 
         header p {
-            margin-top: 10px;
+            margin: 10px 0 0;
             font-size: 17px;
+            color: #d1d5db;
+        }
+
+        nav {
+            background: white;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            color: #2563eb;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 30px auto;
-            padding: 20px;
+            padding: 0 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: #666;
         }
 
         .calculator {
@@ -44,13 +93,24 @@
             margin-bottom: 25px;
         }
 
+        .calculator h2 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
         input {
             width: 100%;
             padding: 12px;
             margin: 8px 0 15px;
-            box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 7px;
+            font-size: 16px;
         }
 
         button {
@@ -62,23 +122,77 @@
             border-radius: 7px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
         }
 
         button:hover {
             background: #1d4ed8;
         }
 
-        #result {
-            margin-top: 20px;
-            font-size: 20px;
+        .result {
+            margin-top: 18px;
+            padding: 12px;
+            background: #f3f4f6;
+            border-radius: 7px;
+            font-size: 18px;
             font-weight: bold;
             text-align: center;
+            min-height: 20px;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .info-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .info-section h2 {
+            margin-top: 0;
         }
 
         footer {
             text-align: center;
-            padding: 25px;
+            padding: 30px 20px;
             color: #666;
+            background: white;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #2563eb;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 7px;
+            }
         }
     </style>
 </head>
@@ -90,36 +204,178 @@
     <p>Free, simple and useful online calculators</p>
 </header>
 
+<nav>
+    <a href="#calculators">Calculators</a>
+    <a href="#about">About</a>
+</nav>
+
 <div class="container">
 
-    <div class="calculator">
-        <h2>Percentage Calculator</h2>
+    <section class="intro" id="calculators">
+        <h2>Everyday Calculators</h2>
+        <p>Quickly calculate percentages, discounts, averages, profit, interest and more.</p>
+    </section>
 
-        <label>What is</label>
-        <input type="number" id="number" placeholder="Enter a number">
+    <div class="calculator-grid">
 
-        <label>percent of</label>
-        <input type="number" id="percent" placeholder="Enter percentage">
+        <!-- Percentage Calculator -->
+        <div class="calculator">
+            <h2>Percentage Calculator</h2>
 
-        <button onclick="calculatePercentage()">Calculate</button>
+            <label for="percentageNumber">What is</label>
+            <input type="number" id="percentageNumber" placeholder="Enter a number">
 
-        <div id="result"></div>
+            <label for="percentageValue">percent of</label>
+            <input type="number" id="percentageValue" placeholder="Enter percentage">
+
+            <button onclick="calculatePercentage()">Calculate</button>
+
+            <div class="result" id="percentageResult"></div>
+        </div>
+
+
+        <!-- Discount Calculator -->
+        <div class="calculator">
+            <h2>Discount Calculator</h2>
+
+            <label for="originalPrice">Original Price</label>
+            <input type="number" id="originalPrice" placeholder="Enter price">
+
+            <label for="discountPercent">Discount (%)</label>
+            <input type="number" id="discountPercent" placeholder="Enter discount">
+
+            <button onclick="calculateDiscount()">Calculate</button>
+
+            <div class="result" id="discountResult"></div>
+        </div>
+
+
+        <!-- Average Calculator -->
+        <div class="calculator">
+            <h2>Average Calculator</h2>
+
+            <label for="averageNumbers">Numbers</label>
+            <input type="text" id="averageNumbers" placeholder="Example: 10, 20, 30">
+
+            <button onclick="calculateAverage()">Calculate</button>
+
+            <div class="result" id="averageResult"></div>
+        </div>
+
+
+        <!-- Profit & Loss -->
+        <div class="calculator">
+            <h2>Profit & Loss</h2>
+
+            <label for="costPrice">Cost Price</label>
+            <input type="number" id="costPrice" placeholder="Enter cost price">
+
+            <label for="sellingPrice">Selling Price</label>
+            <input type="number" id="sellingPrice" placeholder="Enter selling price">
+
+            <button onclick="calculateProfitLoss()">Calculate</button>
+
+            <div class="result" id="profitResult"></div>
+        </div>
+
+
+        <!-- Simple Interest -->
+        <div class="calculator">
+            <h2>Simple Interest</h2>
+
+            <label for="principal">Principal Amount</label>
+            <input type="number" id="principal" placeholder="Enter principal">
+
+            <label for="interestRate">Interest Rate (%)</label>
+            <input type="number" id="interestRate" placeholder="Enter rate">
+
+            <label for="interestTime">Time (Years)</label>
+            <input type="number" id="interestTime" placeholder="Enter years">
+
+            <button onclick="calculateInterest()">Calculate</button>
+
+            <div class="result" id="interestResult"></div>
+        </div>
+
+
+        <!-- Age Calculator -->
+        <div class="calculator">
+            <h2>Age Calculator</h2>
+
+            <label for="birthDate">Date of Birth</label>
+            <input type="date" id="birthDate">
+
+            <button onclick="calculateAge()">Calculate</button>
+
+            <div class="result" id="ageResult"></div>
+        </div>
+
+
+        <!-- Basic Calculator -->
+        <div class="calculator full-width">
+            <h2>Basic Calculator</h2>
+
+            <label for="basicNumber1">First Number</label>
+            <input type="number" id="basicNumber1" placeholder="Enter first number">
+
+            <label for="operation">Operation</label>
+            <select id="operation" style="width:100%; padding:12px; margin:8px 0 15px; border:1px solid #ccc; border-radius:7px; font-size:16px;">
+                <option value="add">Addition (+)</option>
+                <option value="subtract">Subtraction (-)</option>
+                <option value="multiply">Multiplication (×)</option>
+                <option value="divide">Division (÷)</option>
+            </select>
+
+            <label for="basicNumber2">Second Number</label>
+            <input type="number" id="basicNumber2" placeholder="Enter second number">
+
+            <button onclick="calculateBasic()">Calculate</button>
+
+            <div class="result" id="basicResult"></div>
+        </div>
+
     </div>
+
+
+    <!-- About -->
+    <section class="info-section" id="about">
+        <h2>About QuickCalc</h2>
+        <p>
+            QuickCalc is a free online calculator website designed to make
+            everyday calculations simple and convenient.
+        </p>
+        <p>
+            Use our calculators for percentages, discounts, averages,
+            profit and loss, simple interest, age calculations and basic
+            arithmetic.
+        </p>
+    </section>
 
 </div>
 
 <footer>
-    © 2026 QuickCalc
+    <p>© 2026 QuickCalc. All rights reserved.</p>
+    <p>
+        <a href="#calculators">Calculators</a> |
+        <a href="#about">About</a>
+    </p>
 </footer>
 
+
 <script>
+
+function showError(element, message) {
+    element.textContent = message;
+}
+
+
 function calculatePercentage() {
-    const number = parseFloat(document.getElementById("number").value);
-    const percent = parseFloat(document.getElementById("percent").value);
-    const result = document.getElementById("result");
+    const number = parseFloat(document.getElementById("percentageNumber").value);
+    const percent = parseFloat(document.getElementById("percentageValue").value);
+    const result = document.getElementById("percentageResult");
 
     if (isNaN(number) || isNaN(percent)) {
-        result.textContent = "Please enter both numbers.";
+        showError(result, "Please enter both numbers.");
         return;
     }
 
@@ -127,6 +383,174 @@ function calculatePercentage() {
 
     result.textContent = percent + "% of " + number + " = " + answer;
 }
+
+
+function calculateDiscount() {
+    const price = parseFloat(document.getElementById("originalPrice").value);
+    const discount = parseFloat(document.getElementById("discountPercent").value);
+    const result = document.getElementById("discountResult");
+
+    if (isNaN(price) || isNaN(discount)) {
+        showError(result, "Please enter both values.");
+        return;
+    }
+
+    if (price < 0 || discount < 0 || discount > 100) {
+        showError(result, "Please enter valid values.");
+        return;
+    }
+
+    const savings = price * discount / 100;
+    const finalPrice = price - savings;
+
+    result.textContent =
+        "You save " + savings.toFixed(2) +
+        " | Final price: " + finalPrice.toFixed(2);
+}
+
+
+function calculateAverage() {
+    const input = document.getElementById("averageNumbers").value;
+    const result = document.getElementById("averageResult");
+
+    const numbers = input
+        .split(",")
+        .map(Number)
+        .filter(n => !isNaN(n));
+
+    if (numbers.length === 0) {
+        showError(result, "Enter numbers separated by commas.");
+        return;
+    }
+
+    const total = numbers.reduce((sum, number) => sum + number, 0);
+    const average = total / numbers.length;
+
+    result.textContent = "Average = " + average.toFixed(2);
+}
+
+
+function calculateProfitLoss() {
+    const cost = parseFloat(document.getElementById("costPrice").value);
+    const selling = parseFloat(document.getElementById("sellingPrice").value);
+    const result = document.getElementById("profitResult");
+
+    if (isNaN(cost) || isNaN(selling)) {
+        showError(result, "Please enter both prices.");
+        return;
+    }
+
+    if (cost < 0 || selling < 0) {
+        showError(result, "Prices cannot be negative.");
+        return;
+    }
+
+    if (selling > cost) {
+        const profit = selling - cost;
+        result.textContent = "Profit = " + profit.toFixed(2);
+    } else if (selling < cost) {
+        const loss = cost - selling;
+        result.textContent = "Loss = " + loss.toFixed(2);
+    } else {
+        result.textContent = "No profit and no loss.";
+    }
+}
+
+
+function calculateInterest() {
+    const principal = parseFloat(document.getElementById("principal").value);
+    const rate = parseFloat(document.getElementById("interestRate").value);
+    const time = parseFloat(document.getElementById("interestTime").value);
+    const result = document.getElementById("interestResult");
+
+    if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+        showError(result, "Please enter all values.");
+        return;
+    }
+
+    if (principal < 0 || rate < 0 || time < 0) {
+        showError(result, "Values cannot be negative.");
+        return;
+    }
+
+    const interest = (principal * rate * time) / 100;
+    const total = principal + interest;
+
+    result.textContent =
+        "Interest = " + interest.toFixed(2) +
+        " | Total = " + total.toFixed(2);
+}
+
+
+function calculateAge() {
+    const birthDateValue = document.getElementById("birthDate").value;
+    const result = document.getElementById("ageResult");
+
+    if (!birthDateValue) {
+        showError(result, "Please select your date of birth.");
+        return;
+    }
+
+    const birthDate = new Date(birthDateValue + "T00:00:00");
+    const today = new Date();
+
+    if (birthDate > today) {
+        showError(result, "Birth date cannot be in the future.");
+        return;
+    }
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
+        age--;
+    }
+
+    result.textContent = "Your age is " + age + " years.";
+}
+
+
+function calculateBasic() {
+    const first = parseFloat(document.getElementById("basicNumber1").value);
+    const second = parseFloat(document.getElementById("basicNumber2").value);
+    const operation = document.getElementById("operation").value;
+    const result = document.getElementById("basicResult");
+
+    if (isNaN(first) || isNaN(second)) {
+        showError(result, "Please enter both numbers.");
+        return;
+    }
+
+    let answer;
+
+    if (operation === "add") {
+        answer = first + second;
+    }
+
+    if (operation === "subtract") {
+        answer = first - second;
+    }
+
+    if (operation === "multiply") {
+        answer = first * second;
+    }
+
+    if (operation === "divide") {
+        if (second === 0) {
+            showError(result, "Cannot divide by zero.");
+            return;
+        }
+
+        answer = first / second;
+    }
+
+    result.textContent = "Answer = " + answer;
+}
+
 </script>
 
 </body>
