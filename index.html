@@ -323,7 +323,20 @@ ff<!DOCTYPE html>
             <div class="result" id="percentageResult"></div>
         </div>
 
+<!-- Percentage Change Calculator -->
+        <div class="calculator">
+            <h2>Percentage Change</h2>
 
+            <label for="oldValue">Original Value</label>
+            <input type="number" id="oldValue" placeholder="Enter original value">
+
+            <label for="newValue">New Value</label>
+            <input type="number" id="newValue" placeholder="Enter new value">
+
+            <button onclick="calculatePercentageChange()">Calculate</button>
+
+            <div class="result" id="percentageChangeResult"></div>
+        </div>
         <!-- Discount Calculator -->
         <div class="calculator">
             <h2>Discount Calculator</h2>
@@ -567,6 +580,31 @@ function calculatePercentage() {
     const answer = (number * percent) / 100;
 
     result.textContent = percent + "% of " + number + " = " + answer;
+}
+    function calculatePercentageChange() {
+    const oldValue = parseFloat(document.getElementById("oldValue").value);
+    const newValue = parseFloat(document.getElementById("newValue").value);
+    const result = document.getElementById("percentageChangeResult");
+
+    if (isNaN(oldValue) || isNaN(newValue)) {
+        showError(result, "Please enter both values.");
+        return;
+    }
+
+    if (oldValue === 0) {
+        showError(result, "Original value cannot be zero.");
+        return;
+    }
+
+    const change = ((newValue - oldValue) / Math.abs(oldValue)) * 100;
+
+    if (change > 0) {
+        result.textContent = "Percentage increase = " + change.toFixed(2) + "%";
+    } else if (change < 0) {
+        result.textContent = "Percentage decrease = " + Math.abs(change).toFixed(2) + "%";
+    } else {
+        result.textContent = "No percentage change.";
+    }
 }
 
 
