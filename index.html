@@ -11,190 +11,260 @@
     <title>QuickCalc - Free Online Calculators</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            color: #222;
-        }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f1f5f9;
+        margin: 0;
+        color: #1e293b;
+    }
 
+    header {
+        background: linear-gradient(135deg, #111827, #1e3a8a);
+        color: white;
+        text-align: center;
+        padding: 55px 20px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 44px;
+        letter-spacing: -1px;
+    }
+
+    header p {
+        margin: 12px 0 0;
+        font-size: 18px;
+        color: #dbeafe;
+    }
+
+    nav {
+        background: rgba(255, 255, 255, 0.96);
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    nav a {
+        color: #1d4ed8;
+        text-decoration: none;
+        margin: 0 14px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        color: #1e3a8a;
+    }
+
+    .container {
+        max-width: 1050px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .intro {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .intro h2 {
+        margin: 0 0 10px;
+        font-size: 30px;
+        color: #0f172a;
+    }
+
+    .intro p {
+        margin: 0 auto;
+        max-width: 650px;
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .calculator {
+        background: white;
+        padding: 28px;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.07);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .calculator:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+    }
+
+    .calculator h2 {
+        margin: 0 0 20px;
+        color: #0f172a;
+        font-size: 21px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-top: 12px;
+        color: #334155;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 13px;
+        margin: 8px 0 15px;
+        border: 1px solid #cbd5e1;
+        border-radius: 9px;
+        font-size: 16px;
+        background: #fff;
+        color: #1e293b;
+        outline: none;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    button {
+        width: 100%;
+        padding: 13px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+        background: #1d4ed8;
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    .result {
+        margin-top: 18px;
+        padding: 13px;
+        background: #eff6ff;
+        color: #1e3a8a;
+        border: 1px solid #dbeafe;
+        border-radius: 9px;
+        font-size: 17px;
+        font-weight: bold;
+        text-align: center;
+        min-height: 20px;
+        line-height: 1.5;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .info-section {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.07);
+        margin-top: 30px;
+    }
+
+    .info-section h2 {
+        margin-top: 0;
+        color: #0f172a;
+    }
+
+    .info-section p {
+        color: #64748b;
+        line-height: 1.7;
+    }
+
+    footer {
+        text-align: center;
+        padding: 35px 20px;
+        color: #64748b;
+        background: #ffffff;
+        margin-top: 45px;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    footer p {
+        margin: 8px 0;
+    }
+
+    footer a {
+        color: #2563eb;
+        text-decoration: none;
+        margin: 0 8px;
+        font-weight: bold;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
         header {
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 35px 15px;
+            padding: 45px 20px;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 38px;
+            font-size: 36px;
         }
 
         header p {
-            margin: 10px 0 0;
-            font-size: 17px;
-            color: #d1d5db;
-        }
-
-        nav {
-            background: white;
-            padding: 12px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            font-size: 16px;
         }
 
         nav a {
-            color: #2563eb;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
+            display: inline-block;
+            margin: 5px 8px;
         }
 
         .container {
-            max-width: 1000px;
             margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .intro {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .intro h2 {
-            margin-bottom: 8px;
-        }
-
-        .intro p {
-            color: #666;
-        }
-
-        .calculator {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-        }
-
-        .calculator h2 {
-            margin-top: 0;
-            color: #111827;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 12px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        .result {
-            margin-top: 18px;
-            padding: 12px;
-            background: #f3f4f6;
-            border-radius: 7px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            min-height: 20px;
+            padding: 0 15px;
         }
 
         .calculator-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            grid-template-columns: 1fr;
         }
 
         .full-width {
-            grid-column: 1 / -1;
+            grid-column: auto;
         }
 
-        .info-section {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
+        .calculator {
+            padding: 23px;
         }
 
-        .info-section h2 {
-            margin-top: 0;
+        .intro h2 {
+            font-size: 26px;
         }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #666;
-            background: white;
-            margin-top: 30px;
-        }
-
-        footer a {
-            color: #2563eb;
-            text-decoration: none;
-            margin: 0 8px;
-        }
-
-        @media (max-width: 700px) {
-            header h1 {
-                font-size: 32px;
-            }
-
-            .calculator-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .full-width {
-                grid-column: auto;
-            }
-
-            nav a {
-                display: inline-block;
-                margin: 5px 7px;
-            }
-        }
-    </style>
+    }
+</style>   
 </head>
 
 <body>
